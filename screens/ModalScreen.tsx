@@ -6,6 +6,7 @@ import event from "../assets/data/event.json";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from "../components/CustomButton";
 import users from "../assets/data/users.json";
+import { useChatContext } from "../constants/ChatContent";
 
 export default function ModalScreen({ route }) {
   const id = route?.params?.id;
@@ -14,6 +15,8 @@ export default function ModalScreen({ route }) {
   const onJoin = () => {};
 
   const displayedUsers = users.slice(0, 5);
+
+  const { joinEventChatRoom } = useChatContext();
 
   return (
     <View style={styles.container}>
@@ -48,6 +51,11 @@ export default function ModalScreen({ route }) {
         </View>
 
         <CustomButton text="Join the event" onPress={onJoin} />
+        <CustomButton
+          text="Join the conversation"
+          type="SECONDARY"
+          onPress={() => joinEventChatRoom(event)}
+        />
       </View>
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
